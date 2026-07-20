@@ -868,12 +868,28 @@ section:last-of-type {
   border-radius: 999px;
 }
 
-/* Socials gets a taller cap than the writing box — measured against
-   every real post's natural height, 650px comfortably fits ~98% of
-   them without scrolling at all, so the scrollbar only ever kicks in
-   for the rare unusually-tall asset instead of on nearly every post. */
+/* Socials — a genuinely FIXED height (not just a cap), sized to the
+   "standard" case: a single 4:5 image, which measures exactly 618px
+   with the label and padding. This is deliberately "height" and not
+   "max-height" — a max-height still lets the box shrink for smaller
+   assets, which moves the button around exactly as much as a box
+   that grows too tall. Fixed height means the button sits in the
+   exact same spot every single time, whether the asset is small or
+   at the 4:5 standard. A 9x16 or a big campaign grid naturally
+   exceeds this and scrolls, which is fine — that's the rare case. */
+.randomiser__result--scroll-social.is-visible {
+  height: 630px;
+  max-height: 630px;
+}
+
+/* Brand experience mode of the writing box — same fixed-height logic,
+   sized from measuring every real project (571–665px); Odyssey is the
+   tallest, so this comfortably fits all four with zero scrolling,
+   while shorter ones just leave breathing room instead of shrinking
+   the box and moving the button. */
 .randomiser__result--scroll-tall.is-visible {
-  max-height: 650px;
+  height: 680px;
+  max-height: 680px;
 }
 
 /* ---- Content writing article (real blog post, hosted locally) ---- */
@@ -1274,6 +1290,13 @@ section:last-of-type {
   margin-bottom: 0;
 }
 
+.job-entry__intro {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+}
+
 .job-entry__bullets {
   margin: 0;
   padding-left: 18px;
@@ -1288,12 +1311,41 @@ section:last-of-type {
   color: var(--ink-soft);
 }
 
+.job-entry__bullets li strong {
+  color: var(--ink);
+}
+
 @media (max-width: 560px) {
   .job-entry,
   .edu-entry {
     grid-template-columns: 1fr;
     gap: 6px;
   }
+}
+
+.skills-list {
+  list-style: none;
+  margin: 0 0 14px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skills-list li {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  border: 1.5px solid var(--panel-border);
+  border-radius: 999px;
+  padding: 8px 16px;
+}
+
+.skills-aside {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  margin: 0;
 }
 
 .clients {

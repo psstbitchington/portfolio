@@ -390,6 +390,20 @@ function setAgainLabel(btn, text) {
 // used inside the branded-experience result (not a grid, and not the
 // lightbox — the write-up + gallery need to live in the same
 // scrollable box together).
+// Warms the browser cache for the images on either side of the
+// current index, so clicking prev/next feels instant instead of
+// waiting on a fresh network fetch each time.
+function preloadNeighbors(items, index, getSrc) {
+  [index - 1, index + 1].forEach((i) => {
+    const item = items[(i + items.length) % items.length];
+    if (!item) return;
+    const src = getSrc(item);
+    if (!src) return;
+    const preloadImg = new Image();
+    preloadImg.src = encodeURI(src);
+  });
+}
+
 function buildImageCarousel(images) {
   const wrap = document.createElement("div");
   wrap.className = "img-carousel";
@@ -397,7 +411,8 @@ function buildImageCarousel(images) {
   const viewport = document.createElement("div");
   viewport.className = "img-carousel__viewport";
   const img = document.createElement("img");
-  img.className = "img-carousel__img";
+  img.className = "img-carousel__img is-clickable";
+  img.addEventListener("click", () => openLightbox(images, index));
   viewport.appendChild(img);
   wrap.appendChild(viewport);
 
@@ -426,6 +441,7 @@ function buildImageCarousel(images) {
     img.src = encodeURI(m.src);
     img.alt = m.alt || "";
     counter.textContent = `${index + 1} / ${images.length}`;
+    preloadNeighbors(images, index, (m) => m.src);
   }
   prev.addEventListener("click", () => {
     index = (index - 1 + images.length) % images.length;
@@ -452,7 +468,9 @@ function buildColourSlideshow(slides) {
   stage.className = "colour-slideshow__stage";
 
   const img = document.createElement("img");
-  img.className = "colour-slideshow__image";
+  img.className = "colour-slideshow__image is-clickable";
+  const slideImages = slides.map((s) => s.image);
+  img.addEventListener("click", () => openLightbox(slideImages, index));
 
   const textCol = document.createElement("div");
   textCol.className = "colour-slideshow__text-col";
@@ -494,6 +512,7 @@ function buildColourSlideshow(slides) {
     name.textContent = s.name;
     desc.textContent = s.description;
     counter.textContent = `${index + 1} / ${slides.length}`;
+    preloadNeighbors(slides, index, (s) => s.image.src);
   }
   prev.addEventListener("click", () => {
     index = (index - 1 + slides.length) % slides.length;
@@ -627,6 +646,11 @@ function initWritingRandomiser() {
     container.appendChild(
       writingMode === "brand" ? buildBrandedExperienceResult(choice) : buildContentWritingResult(choice)
     );
+    // Brand experience posts (write-up + one image) are much shorter
+    // than a full article — give them a taller cap so they fit without
+    // scrolling, while long-form articles keep the shorter, intentionally
+    // scrollable box.
+    container.classList.toggle("randomiser__result--scroll-tall", writingMode === "brand");
     container.classList.add("is-visible");
     container.scrollTop = 0;
     setAgainLabel(btn, "Shuffle again");
@@ -924,12 +948,29 @@ document.addEventListener("DOMContentLoaded", () => {
       header.appendChild(title);
       header.appendChild(company);
 
+      if (job.intro) {
+        const intro = document.createElement("p");
+        intro.className = "job-entry__intro";
+        intro.textContent = job.intro;
+        header.appendChild(intro);
+      }
+
       if (job.bullets && job.bullets.length) {
         const list = document.createElement("ul");
         list.className = "job-entry__bullets";
         job.bullets.forEach((bullet) => {
           const li = document.createElement("li");
-          li.textContent = bullet;
+          // Bullets can lead with a **bold label** — split it out into
+          // its own <strong> so the label reads as a mini-heading.
+          const match = bullet.match(/^\*\*(.+?):\*\*\s*(.*)$/);
+          if (match) {
+            const strong = document.createElement("strong");
+            strong.textContent = `${match[1]}: `;
+            li.appendChild(strong);
+            li.appendChild(document.createTextNode(match[2]));
+          } else {
+            li.textContent = bullet;
+          }
           list.appendChild(li);
         });
         header.appendChild(list);
@@ -966,6 +1007,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
       education.appendChild(entry);
     });
+  }
+
+  const skills = document.getElementById("skills");
+  if (skills && SITE.skills) {
+    skills.innerHTML = "";
+    const list = document.createElement("ul");
+    list.className = "skills-list";
+    SITE.skills.items.forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      list.appendChild(li);
+    });
+    skills.appendChild(list);
+    if (SITE.skills.aside) {
+      const aside = document.createElement("p");
+      aside.className = "skills-aside";
+      aside.textContent = SITE.skills.aside;
+      skills.appendChild(aside);
+    }
   }
 
   const clients = document.getElementById("clients");
