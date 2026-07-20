@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Santine Pillay — Creative Strategist</title>
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="page-frame" aria-hidden="true"></div>
+
+  <nav class="nav">
+    <a href="index.html" class="nav__name" aria-current="page">Home</a>
+    <ul class="nav__links">
+      <li><a href="about.html">About Me</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- 1. HERO -->
+    <section class="hero">
+      <span class="hero__role" data-site-role>Creative Strategist</span>
+      <h1 class="hero__name">
+        <span data-site-name>Santine Pillay</span>
+        <span class="hero__pronunciation" data-site-pronunciation>~ sun • tee • nee ~</span>
+      </h1>
+      <p class="hero__bio" data-site-hero-bio>Placeholder bio</p>
+      <p class="hero__aka" data-site-aka>Placeholder aka line</p>
+      <div class="hero__actions">
+        <a class="btn btn--solid" data-bitchington-link href="#" target="_blank" rel="noopener noreferrer">
+          Read Bitchington
+        </a>
+        <button class="btn btn--ghost" id="scroll-cue-btn" type="button">
+          Keep scrolling
+          <span class="scroll-chevron" aria-hidden="true">⌄</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 2. TOP 3 PROJECTS -->
+    <section id="work">
+      <span class="section-label">Selected work</span>
+      <h2 class="section-title">3 greatest hits</h2>
+      <p class="section-sub">Some killer, no filler projects that best define my decade.</p>
+      <div class="cards" id="top-projects"></div>
+    </section>
+
+    <!-- 3. WRITING RANDOMISER -->
+    <section id="writing">
+      <span class="section-label">Words</span>
+      <h2 class="section-title">I wanna see how you write</h2>
+      <div class="randomiser">
+        <p class="section-sub">I've tackled every tone from romanticising wall paint to dismantling the shame of erectile dysfunction with humour. Pick a filter and keep shuffling to see for yourself.</p>
+        <div class="length-toggle-row">
+          <span class="length-toggle-label">Pick your poison</span>
+          <button
+            class="toggle-switch"
+            id="length-toggle"
+            type="button"
+            role="switch"
+            aria-checked="false"
+            aria-label="Choose writing type"
+          >
+            <span class="toggle-switch__thumb" aria-hidden="true"></span>
+            <span class="toggle-switch__option toggle-switch__option--long">Brand experiences</span>
+            <span class="toggle-switch__option toggle-switch__option--short">Content writing</span>
+          </button>
+        </div>
+        <div class="randomiser__result randomiser__result--scroll" id="writing-result"></div>
+        <button class="randomise-btn" id="writing-randomise-btn" type="button">
+          <span class="btn-label">Shuffle</span> <span class="dice">👯‍♀️</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 4. SOCIALS RANDOMISER -->
+    <section id="socials">
+      <span class="section-label">Digital</span>
+      <h2 class="section-title">Show me how you Social</h2>
+      <div class="randomiser">
+        <p class="section-sub">From cultural hijinks to Meta ads, save your thumb the effort and hit “Jive” to see how I hijack the feed.</p>
+        <div class="randomiser__result randomiser__result--scroll randomiser__result--scroll-tall" id="socials-result"></div>
+        <button class="randomise-btn" id="socials-randomise-btn" type="button">
+          <span class="btn-label">Jive</span> <span class="dice">💃</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 5. REAL WORLD RANDOMISER -->
+    <section id="real-world">
+      <span class="section-label">IRL</span>
+      <h2 class="section-title">Now take me offline</h2>
+      <div class="randomiser">
+        <p class="section-sub">From product packaging to events and experiences. Loosen your hips and hit “boogie” to see how I take up physical space.</p>
+        <div class="randomiser__result" id="realworld-result"></div>
+        <button class="randomise-btn" id="realworld-randomise-btn" type="button">
+          <span class="btn-label">Boogie</span> <span class="dice">🕺</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>© 2026 Santine Pillay</footer>
+
+  <!-- MODAL: shared project template, used only for Top 3 Projects -->
+  <div class="modal-backdrop" id="modal-backdrop">
+    <div class="modal">
+      <button class="modal__close" id="modal-close" type="button" aria-label="Close">✕</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX: tap any real image/video in a project to enlarge + step through the gallery -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox__close" id="lightbox-close" type="button" aria-label="Close">✕</button>
+    <button class="lightbox__arrow lightbox__arrow--prev" id="lightbox-prev" type="button" aria-label="Previous">‹</button>
+    <div class="lightbox__content" id="lightbox-content"></div>
+    <button class="lightbox__arrow lightbox__arrow--next" id="lightbox-next" type="button" aria-label="Next">›</button>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/content-writing-data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
