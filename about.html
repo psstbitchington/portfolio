@@ -13,8 +13,8 @@
   <div class="page-frame" aria-hidden="true"></div>
 
   <nav class="nav">
-    <a href="index.html" class="nav__name">Home</a>
     <ul class="nav__links">
+      <li><a href="index.html">Home</a></li>
       <li><a href="about.html" aria-current="page">About Me</a></li>
     </ul>
   </nav>
@@ -35,6 +35,11 @@
     </section>
 
     <section>
+      <h2 class="section-title">Occupational Pleasures</h2>
+      <div class="op-grid" id="op-grid"></div>
+    </section>
+
+    <section>
       <h2 class="section-title">Work Experience</h2>
       <div class="work-experience" id="work-experience"></div>
     </section>
@@ -50,7 +55,7 @@
     </section>
 
     <section>
-      <h2 class="section-title">Clients</h2>
+      <h2 class="section-title">Brands</h2>
       <div class="clients" id="clients"></div>
     </section>
 
@@ -62,6 +67,14 @@
   </main>
 
   <footer>© 2026 Santine Pillay</footer>
+
+  <!-- LIGHTBOX: tap any image to enlarge + step through the gallery -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox__close" id="lightbox-close" type="button" aria-label="Close">✕</button>
+    <button class="lightbox__arrow lightbox__arrow--prev" id="lightbox-prev" type="button" aria-label="Previous">‹</button>
+    <div class="lightbox__content" id="lightbox-content"></div>
+    <button class="lightbox__arrow lightbox__arrow--next" id="lightbox-next" type="button" aria-label="Next">›</button>
+  </div>
 
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

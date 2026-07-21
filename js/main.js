@@ -108,8 +108,11 @@ function collectProjectMedia(project) {
       });
     }
   });
-  if (project.copyFiller && (project.copyFiller.src || project.copyFiller.embedUrl)) {
-    list.push(project.copyFiller);
+  if (project.copyFiller) {
+    const fillers = Array.isArray(project.copyFiller) ? project.copyFiller : [project.copyFiller];
+    fillers.forEach((m) => {
+      if (m.src || m.embedUrl) list.push(m);
+    });
   }
   if (project.extraGallery) {
     project.extraGallery.forEach((m) => {
@@ -251,11 +254,15 @@ function buildProjectCard(project) {
 
   // Fills the empty space left at the bottom of the copy column when
   // the media column (photos) runs taller than the copy (paragraphs).
+  // Accepts either a single media item or an array, stacked in order.
   if (project.copyFiller) {
-    const fillerTile = placeholderTile(project.copyFiller);
-    fillerTile.classList.add("proj__media-item", "proj__copy-filler");
-    copyCol.appendChild(fillerTile);
-    makeEnlargeable(fillerTile, project.copyFiller, galleryList);
+    const fillers = Array.isArray(project.copyFiller) ? project.copyFiller : [project.copyFiller];
+    fillers.forEach((m) => {
+      const fillerTile = placeholderTile(m);
+      fillerTile.classList.add("proj__media-item", "proj__copy-filler");
+      copyCol.appendChild(fillerTile);
+      makeEnlargeable(fillerTile, m, galleryList);
+    });
   }
 
   columns.appendChild(copyCol);
@@ -369,6 +376,75 @@ function showLightboxItem(index) {
 function closeLightbox() {
   lightboxEl.classList.remove("is-open");
   lightboxContent.innerHTML = "";
+}
+
+/* ============================================================
+   OCCUPATIONAL PLEASURES — justified gallery
+   Rows are hand-curated (SITE.occupationalPleasuresRows); each row's
+   height is derived from the container width divided by the sum of
+   its photos' aspect ratios, so rows always fill edge-to-edge with
+   zero leftover gap. Fewer photos per row (or a lower aspect-ratio
+   sum, e.g. portraits) naturally produces a taller row — that's what
+   creates the big/medium/small hero-ish variation, no manual sizing
+   needed. Recomputes on resize so it stays gapless responsively.
+   ============================================================ */
+function layoutJustifiedGallery(container, rows, items, gap) {
+  const containerWidth = container.clientWidth;
+  if (!containerWidth) return;
+  container.querySelectorAll(".op-grid__row").forEach((row) => {
+    const sumAspect = Array.from(row.children).reduce(
+      (sum, tile) => sum + Number(tile.dataset.aspect),
+      0
+    );
+    const rowGap = gap * (row.children.length - 1);
+    const rowHeight = (containerWidth - rowGap) / sumAspect;
+    row.style.height = `${rowHeight}px`;
+    Array.from(row.children).forEach((tile) => {
+      tile.style.width = `${rowHeight * Number(tile.dataset.aspect)}px`;
+    });
+  });
+}
+
+function initOccupationalPleasures() {
+  const opGrid = document.getElementById("op-grid");
+  if (!opGrid || !SITE.occupationalPleasures || !SITE.occupationalPleasuresRows) return;
+
+  const itemsByNumber = SITE.occupationalPleasures;
+  const rows = SITE.occupationalPleasuresRows;
+  const gap = 8;
+
+  // Flat reading-order list (matches row layout) so the lightbox's
+  // prev/next steps through the gallery the same way it's displayed.
+  const gallery = rows.flat().map((n) => itemsByNumber[n]);
+  let galleryIndex = 0;
+
+  opGrid.innerHTML = "";
+  rows.forEach((rowNumbers) => {
+    const rowEl = document.createElement("div");
+    rowEl.className = "op-grid__row";
+    rowNumbers.forEach((n) => {
+      const item = itemsByNumber[n];
+      const tile = document.createElement("div");
+      tile.className = "op-grid__tile is-clickable";
+      tile.dataset.aspect = item.aspect;
+      const img = document.createElement("img");
+      img.src = encodeURI(item.src);
+      img.alt = item.alt || "";
+      img.loading = "lazy";
+      tile.appendChild(img);
+      const thisIndex = galleryIndex++;
+      tile.addEventListener("click", () => openLightbox(gallery, thisIndex));
+      rowEl.appendChild(tile);
+    });
+    opGrid.appendChild(rowEl);
+  });
+
+  layoutJustifiedGallery(opGrid, rows, itemsByNumber, gap);
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => layoutJustifiedGallery(opGrid, rows, itemsByNumber, gap), 100);
+  });
 }
 
 /* ============================================================
@@ -885,7 +961,6 @@ function renderIdentity() {
   document.querySelectorAll("[data-site-pronunciation]").forEach((el) => (el.textContent = SITE.namePronunciation));
   document.querySelectorAll("[data-site-role]").forEach((el) => (el.textContent = SITE.role));
   document.querySelectorAll("[data-site-hero-bio]").forEach((el) => (el.textContent = SITE.heroBio));
-  document.querySelectorAll("[data-site-aka]").forEach((el) => (el.textContent = SITE.heroAka));
   document.querySelectorAll("[data-bitchington-link]").forEach((el) => (el.href = SITE.bitchingtonUrl));
 }
 
@@ -906,9 +981,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const cardsContainer = document.getElementById("top-projects");
   if (cardsContainer) renderCards(cardsContainer, TOP_PROJECTS);
 
+  initLightbox();
+
   if (document.getElementById("modal-backdrop")) {
     initModal();
-    initLightbox();
     initWritingRandomiser();
     initRealWorldRandomiser();
     initSocialsRandomiser();
@@ -924,6 +1000,8 @@ document.addEventListener("DOMContentLoaded", () => {
       aboutBio.appendChild(p);
     });
   }
+
+  initOccupationalPleasures();
 
   const workExperience = document.getElementById("work-experience");
   if (workExperience) {
@@ -1039,12 +1117,25 @@ document.addEventListener("DOMContentLoaded", () => {
         img.src = client.logo;
         img.alt = client.name;
         img.loading = "lazy";
+        if (client.logoScale) {
+          img.style.maxHeight = `${40 * client.logoScale}px`;
+        }
         chip.appendChild(img);
       } else {
         chip.textContent = client.name;
       }
       clients.appendChild(chip);
     });
+    // Padded to a multiple of 20 (divisible by every column count the
+    // grid uses across breakpoints — 5, 4, 2) with invisible fillers,
+    // so the grid stays a clean rectangle instead of a ragged last row.
+    const target = Math.ceil(SITE.clients.length / 20) * 20;
+    for (let i = SITE.clients.length; i < target; i++) {
+      const filler = document.createElement("div");
+      filler.className = "client-chip client-chip--filler";
+      filler.setAttribute("aria-hidden", "true");
+      clients.appendChild(filler);
+    }
   }
 
   const contactList = document.getElementById("contact-list");

@@ -69,7 +69,7 @@ video {
   z-index: 50;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   /* Slightly more top padding than bottom — visually centers the
      text, which otherwise reads as sitting too high in the bar. */
   padding: 27px clamp(20px, 5vw, 56px) 17px;
@@ -77,12 +77,6 @@ video {
   border-bottom: 2px solid var(--wave);
 }
 
-/* "Home" (left) now uses the exact same treatment as the "About Me"
-   link (right) — same weight/size/padding/hover underline — since
-   they're functionally two equal nav links, not a logo + a link.
-   Matching the padding is also what fixes the vertical alignment:
-   without it, "Home" sat higher than "About Me" in the bar. */
-.nav__name,
 .nav__links a {
   text-decoration: none;
   font-weight: 600;
@@ -100,7 +94,6 @@ video {
   padding: 0;
 }
 
-.nav__name::after,
 .nav__links a::after {
   content: "";
   position: absolute;
@@ -112,8 +105,6 @@ video {
   transition: width 0.25s ease;
 }
 
-.nav__name:hover::after,
-.nav__name[aria-current="page"]::after,
 .nav__links a:hover::after,
 .nav__links a[aria-current="page"]::after {
   width: 100%;
@@ -284,8 +275,14 @@ section:last-of-type {
    ============================================================ */
 .cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+}
+
+@media (max-width: 1000px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 820px) {
@@ -868,20 +865,6 @@ section:last-of-type {
   border-radius: 999px;
 }
 
-/* Socials — a genuinely FIXED height (not just a cap), sized to the
-   "standard" case: a single 4:5 image, which measures exactly 618px
-   with the label and padding. This is deliberately "height" and not
-   "max-height" — a max-height still lets the box shrink for smaller
-   assets, which moves the button around exactly as much as a box
-   that grows too tall. Fixed height means the button sits in the
-   exact same spot every single time, whether the asset is small or
-   at the 4:5 standard. A 9x16 or a big campaign grid naturally
-   exceeds this and scrolls, which is fine — that's the rare case. */
-.randomiser__result--scroll-social.is-visible {
-  height: 630px;
-  max-height: 630px;
-}
-
 /* Brand experience mode of the writing box — same fixed-height logic,
    sized from measuring every real project (571–665px); Odyssey is the
    tallest, so this comfortably fits all four with zero scrolling,
@@ -1348,10 +1331,59 @@ section:last-of-type {
   margin: 0;
 }
 
+.op-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.op-grid__row {
+  display: flex;
+  gap: 8px;
+}
+
+.op-grid__tile {
+  flex-shrink: 0;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.op-grid__tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.op-grid__tile:hover img {
+  transform: scale(1.06);
+}
+
 .clients {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   gap: 14px;
+}
+
+@media (max-width: 780px) {
+  .clients {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 460px) {
+  .clients {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.client-chip--filler {
+  visibility: hidden;
+  pointer-events: none;
+  border-color: transparent;
 }
 
 .client-chip {
@@ -1366,7 +1398,7 @@ section:last-of-type {
   font-weight: 600;
   color: var(--ink);
   font-size: 0.9rem;
-  min-height: 72px;
+  height: 123px;
 }
 
 .client-chip img {

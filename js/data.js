@@ -12,7 +12,6 @@ const SITE = {
   role: "Creative Strategist",
   heroBio:
     "10 years in the biz of crafting brand narratives that blend distinct copy with strategic performance. Big budget or no budget, I build decadent worlds from traditional to innovative mediums designed to give brands an unfair advantage.",
-  heroAka: "Call me Bitchington after hours. It's an alter ego for my pop culture newsletter.",
   bitchingtonUrl: "https://bitchington.substack.com",
   aboutBio: [
     "Who runs the world? Beyoncé, surely. But also, stories.",
@@ -20,6 +19,35 @@ const SITE = {
     "I specialise in flavourful brand voice so you'll always beat the AI allegations, but plot twist… AI will be a part of the process.",
     "As a writer, I inform, entertain, enthrall. As a strategist, I'll Leverage Data To Drive Actionable Insights With Meaningful Impact. Translation: my stellar Meta ads track record speaks for itself. Iteration after iteration with a healthy nCAC till I know 50-year-old men a little too intimately.",
     "Online, offline, a million dollars, or one dollar… I'll still give you an unfair advantage.",
+  ],
+  // Aspect ratios (w/h) are the real pixel dimensions of each photo —
+  // the justified-gallery layout below needs them upfront to size
+  // rows without waiting on image load.
+  occupationalPleasures: (() => {
+    const ASPECT = {
+      1: 1.3333, 2: 0.75, 3: 1.3333, 4: 0.75, 5: 1.5504, 6: 1.3675,
+      7: 0.75, 8: 1.0, 9: 0.75, 10: 1.5009, 11: 0.75, 12: 1.3333,
+      13: 1.7786, 14: 0.7505, 15: 1.5009, 16: 0.5625, 17: 0.75,
+      18: 0.75, 19: 1.3333, 20: 1.3333, 21: 1.3333, 22: 0.75,
+    };
+    const items = {};
+    Object.keys(ASPECT).forEach((n) => {
+      items[n] = {
+        src: `assets/images/occupational-pleasures/op-${n}.jpg`,
+        alt: "Occupational pleasures",
+        aspect: ASPECT[n],
+      };
+    });
+    return items;
+  })(),
+  // Curated justified-gallery rows (image numbers, top to bottom,
+  // left to right) — hand-picked to feature the best shots bigger
+  // and mix vertical/horizontal photos within each row.
+  occupationalPleasuresRows: [
+    [8, 15, 16],
+    [10, 14, 4, 1, 12],
+    [9, 11, 17, 18, 6],
+    [2, 7, 22, 3, 19, 5, 13, 20, 21],
   ],
   workExperience: [
     {
@@ -84,30 +112,35 @@ const SITE = {
     items: [
       "Copywriting",
       "Creative/brand strategy",
+      "Social media content strategy",
+      "Performance/paid social",
+      "Project management",
       "AI workflows",
       "Production (events & video)",
       "CRM flows (Customer.io, Mailchimp)",
     ],
     aside: "+ Unnaturally in-depth pop culture knowledge",
   },
-  // logo is omitted where no asset was available yet — the client
-  // chip just falls back to a text badge in that case.
   clients: [
-    { name: "Aldo" },
+    { name: "Aldo", logo: "assets/images/clients/aldo.png" },
     { name: "AMC Asia", logo: "assets/images/clients/amc-asia.png" },
     { name: "Anlene", logo: "assets/images/clients/anlene.png" },
     { name: "Club Med", logo: "assets/images/clients/club-med.png" },
-    { name: "Cyber Security Agency" },
-    { name: "HUGO" },
-    { name: "Leica" },
-    { name: "MCCY" },
-    { name: "Munich Automobiles", logo: "assets/images/clients/munich-automobiles.png" },
-    { name: "Renault", logo: "assets/images/clients/renault.png" },
-    { name: "Resorts World Sentosa" },
+    { name: "Cyber Security Agency", logo: "assets/images/clients/csa.png" },
+    { name: "Gush", logo: "assets/images/clients/gush.png" },
+    { name: "HUGO", logo: "assets/images/clients/hugo.png", logoScale: 1.4 },
+    { name: "Leica", logo: "assets/images/clients/leica.png", logoScale: 1.8 },
+    { name: "MCCY", logo: "assets/images/clients/mccy.png" },
+    { name: "Munich Automobiles", logo: "assets/images/clients/munich-automobiles.png", logoScale: 1.4 },
+    { name: "noah", logo: "assets/images/clients/noah.png", logoScale: 0.75 },
+    { name: "Renault", logo: "assets/images/clients/renault.png", logoScale: 2 },
+    { name: "Resorts World Sentosa", logo: "assets/images/clients/resorts-world-sentosa.png" },
     { name: "Samsung", logo: "assets/images/clients/samsung.png" },
-    { name: "SEASONS" },
-    { name: "Sembawang GRC", logo: "assets/images/clients/sembawang-grc.png" },
-    { name: "Sundance Asia", logo: "assets/images/clients/sundance-asia.png" },
+    { name: "SEASONS", logo: "assets/images/clients/seasons.png" },
+    { name: "Sembawang GRC", logo: "assets/images/clients/sembawang-grc.png", logoScale: 2 },
+    { name: "Standard Chartered", logo: "assets/images/clients/standard-chartered.png", logoScale: 1.6 },
+    { name: "Sundance Asia", logo: "assets/images/clients/sundance-asia.png", logoScale: 1.8 },
+    { name: "zoey", logo: "assets/images/clients/zoey.png" },
   ],
   contact: {
     email: "santinepillay@gmail.com",
@@ -192,43 +225,39 @@ const TOP_PROJECTS = [
       ],
     },
     flex: {
-      text: "The campaign flooded our funnel with fresh eyes — even prompting women to get help for their husbands. This successfully drove down nCACs while driving higher conversions.",
+      text: "The campaign flooded our funnel with fresh eyes, racking up 63,000 organic views on YouTube—even prompting women to get help for their husbands. This successfully slashed our nCAC to under $160 while driving higher overall conversions.",
       media: [],
     },
   },
   {
     id: "top-2",
-    title: "Leica Playground",
-    tag: "Leica",
+    title: "The “Better” Campaign",
+    tag: "noah",
     year: "",
-    role: "Creative Lead & Producer",
-    hero: image("assets/images/leica-playground.png", "Attendee photographing the Leica Playground wall installation with instax prints"),
+    role: "Art Director & Creative Lead",
+    hero: image("assets/images/noah-better-campaign-hero.jpg", "Model with a half-shaved mullet and sunglasses for noah's Better campaign"),
     headache: {
-      text: "Leica needed a massive lifestyle event for their second ‘Leica Playground’. The mandate was clear: break out of their traditional demographic and capture a younger audience.",
-      media: [image("assets/images/leica-poster.webp", "Leica Playground event poster with schedule and sponsors")],
-    },
-    hack: {
-      text: "We anchored the event around “Observation,” turning Design Orchard into a photographer's wet dream. We used live music and gamified spaces to get youth living in the moment with their cameras out.",
-      media: [image("assets/images/leica-event-umbrellas.webp", "Attendees under branded Leica Playground umbrellas at the event")],
-    },
-    hustle: {
-      text: "I conceptualised and produced the entire experiential ecosystem — weaving together AR treasure hunts, glamping, and art installations.",
-      media: [video("https://youtu.be/Tw1ZHRsIoRA", "Leica Playground event film")],
-    },
-    flex: {
-      text: "We successfully transformed a heritage brand into a culturally relevant space. Our Leica Sofort activation went unexpectedly viral, pulling massive queues of youth ready to test-drive the camera.",
+      text: "Men’s health is usually a sea of chiseled models and sterile, clinical perfection. We needed to genuinely humanise the brand and bring its tagline — “Better Health, Better You” — to life by proving that progress matters more than perfection.",
       media: [],
     },
-    // The media column runs much taller than the copy column (photos
-    // vs. short paragraphs), so the copy side ends with a lot of
-    // empty space below "The Flex". This drops one image into the
-    // bottom of the copy column itself to fill that gap.
-    copyFiller: image("assets/images/leica-photoshoot-bts.webp", "Behind the scenes of the campaign photoshoot"),
-    // Whatever's left over once both columns finish, as a full-width
-    // breakout at the very end of the card.
-    extraGallery: [
-      image("assets/images/leica-glamping-lounge.webp", "Glamping lounge zone at the Leica Playground event"),
-    ],
+    hack: {
+      text: "We ditched the aspirational fantasy and leaned hard into the absurd reality of the “everyman.” We used highly subversive, uncomfortable humour to strip away the shame surrounding erectile dysfunction, hair loss, and weight loss.",
+      media: [],
+    },
+    hustle: {
+      text: "I cast the talent and directed a gloriously unhinged shoot. For ED, we stuffed a nerdy model's athletic shorts for a visibly larger bulge. For hair loss, I personally shaved a model's head into increasingly ridiculous cuts between takes while he maintained absolute, delusional confidence. And for weight loss, we got a middle-aged man proudly baring his gut in tighty-whities.",
+      media: [
+        image("assets/images/noah-better-hair-1.jpg", "Better Hair — model freshly bald for noah's Better campaign"),
+        image("assets/images/noah-better-hair-2.jpg", "Better Hair — model mid-shave with a mullet for noah's Better campaign"),
+        image("assets/images/noah-better-hair-3.jpg", "Better Hair — close-up of the model's shaved hairline for noah's Better campaign"),
+        image("assets/images/noah-better-sex.jpg", "Better Sex — model in athletic wear for noah's Better campaign"),
+        image("assets/images/noah-better-shape.jpg", "Better Shape — model in white underwear for noah's Better campaign"),
+      ],
+    },
+    flex: {
+      text: "We completely broke the sterile healthcare mold. While originally conceptualised as a standalone campaign, this unapologetically authentic aesthetic was so effective it successfully pivoted to become the foundational visual library that feeds noah's entire digital ecosystem today.",
+      media: [],
+    },
   },
   {
     id: "top-3",
@@ -253,6 +282,38 @@ const TOP_PROJECTS = [
       text: "We hacked a legal grey area to drive massive awareness. Men fiercely competed for a prize while accidentally learning the signs of low T.",
       media: [],
     },
+  },
+  {
+    id: "top-4",
+    title: "Leica Playground 2019",
+    tag: "Leica",
+    year: "",
+    role: "Creative Lead & Producer",
+    hero: image("assets/images/leica-playground.png", "Attendee photographing the Leica Playground wall installation with instax prints"),
+    headache: {
+      text: "Leica needed a massive lifestyle event for their second ‘Leica Playground’. The mandate was clear: break out of their traditional demographic and capture a younger audience.",
+      media: [image("assets/images/leica-poster.webp", "Leica Playground event poster with schedule and sponsors")],
+    },
+    hack: {
+      text: "We anchored the event around “Observation,” turning Design Orchard into a photographer's wet dream. We used live music and gamified spaces to get youth living in the moment with their cameras out.",
+      media: [image("assets/images/leica-event-umbrellas.webp", "Attendees under branded Leica Playground umbrellas at the event")],
+    },
+    hustle: {
+      text: "I conceptualised and produced the entire experiential ecosystem — weaving together AR treasure hunts, glamping, and art installations.",
+      media: [video("https://youtu.be/Tw1ZHRsIoRA", "Leica Playground event film")],
+    },
+    flex: {
+      text: "We successfully transformed a heritage brand into a culturally relevant force for a new generation. In just a single day, the event pulled upwards of 1,000 attendees and saw fully booked workshops. Add to that, our Leica Sofort activation went unexpectedly viral, drawing massive queues of youth ready to test-drive the camera.",
+      media: [],
+    },
+    // The media column runs much taller than the copy column (photos
+    // vs. short paragraphs), so the copy side ends with a lot of
+    // empty space below "The Flex". This drops one image into the
+    // bottom of the copy column itself to fill that gap.
+    copyFiller: [
+      image("assets/images/leica-photoshoot-bts.webp", "Behind the scenes of the campaign photoshoot"),
+      image("assets/images/leica-glamping-lounge.webp", "Glamping lounge zone at the Leica Playground event"),
+    ],
   },
 ];
 
@@ -589,6 +650,7 @@ const SOCIALS_CLIENTS = [
       { label: null, media: [image("assets/images/socials/noah/ED/1 Longer than her ex 4x5.png", "Longer than her ex \u2014 noah social post")] },
       { label: null, media: [image("assets/images/socials/noah/ED/Apple watch 1x1 EN.png", "Apple watch \u2014 noah social post")] },
       { label: null, media: [image("assets/images/socials/noah/ED/Bang buck 4x5.png", "Bang buck \u2014 noah social post")] },
+      { label: null, media: [image("assets/images/socials/noah/ED/Crows 1x1.png", "Chinatown crows have beef with bald men \u2014 noah social post")] },
       { label: null, media: [image("assets/images/socials/noah/ED/Doctor 1x1 EN.png", "Doctor \u2014 noah social post")] },
       { label: null, media: [image("assets/images/socials/noah/ED/Downstairs neighbours 1x1 EN.png", "Downstairs neighbours \u2014 noah social post")] },
       { label: null, media: [image("assets/images/socials/noah/ED/ED group 1x1 EN.png", "ED group \u2014 noah social post")] },
