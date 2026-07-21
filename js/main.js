@@ -243,12 +243,18 @@ function buildProjectCard(project) {
     copyCol.appendChild(block);
 
     if (data.media && data.media.length) {
-      data.media.forEach((m) => {
-        const tile = placeholderTile(m);
-        tile.classList.add("proj__media-item");
-        mediaCol.appendChild(tile);
-        makeEnlargeable(tile, m, galleryList);
-      });
+      if (data.carousel && data.media.length > 1) {
+        const carousel = buildImageCarousel(data.media);
+        carousel.classList.add("proj__media-item");
+        mediaCol.appendChild(carousel);
+      } else {
+        data.media.forEach((m) => {
+          const tile = placeholderTile(m);
+          tile.classList.add("proj__media-item");
+          mediaCol.appendChild(tile);
+          makeEnlargeable(tile, m, galleryList);
+        });
+      }
     }
   });
 
@@ -961,6 +967,7 @@ function renderIdentity() {
   document.querySelectorAll("[data-site-pronunciation]").forEach((el) => (el.textContent = SITE.namePronunciation));
   document.querySelectorAll("[data-site-role]").forEach((el) => (el.textContent = SITE.role));
   document.querySelectorAll("[data-site-hero-bio]").forEach((el) => (el.textContent = SITE.heroBio));
+  document.querySelectorAll("[data-site-aka]").forEach((el) => (el.textContent = SITE.heroAka));
   document.querySelectorAll("[data-bitchington-link]").forEach((el) => (el.href = SITE.bitchingtonUrl));
 }
 
@@ -999,6 +1006,17 @@ document.addEventListener("DOMContentLoaded", () => {
       p.textContent = paragraph;
       aboutBio.appendChild(p);
     });
+    if (SITE.aboutBitchington) {
+      const subheading = document.createElement("p");
+      subheading.className = "about-bio__subheading";
+      subheading.textContent = SITE.aboutBitchington.heading;
+      aboutBio.appendChild(subheading);
+
+      const p = document.createElement("p");
+      p.className = "about-bio__paragraph";
+      p.textContent = SITE.aboutBitchington.text;
+      aboutBio.appendChild(p);
+    }
   }
 
   initOccupationalPleasures();

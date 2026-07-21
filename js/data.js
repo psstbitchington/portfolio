@@ -12,6 +12,7 @@ const SITE = {
   role: "Creative Strategist",
   heroBio:
     "10 years in the biz of crafting brand narratives that blend distinct copy with strategic performance. Big budget or no budget, I build decadent worlds from traditional to innovative mediums designed to give brands an unfair advantage.",
+  heroAka: "Call me Bitchington after hours. It's an alter ego for my pop culture newsletter.",
   bitchingtonUrl: "https://bitchington.substack.com",
   aboutBio: [
     "Who runs the world? Beyoncé, surely. But also, stories.",
@@ -20,6 +21,10 @@ const SITE = {
     "As a writer, I inform, entertain, enthrall. As a strategist, I'll Leverage Data To Drive Actionable Insights With Meaningful Impact. Translation: my stellar Meta ads track record speaks for itself. Iteration after iteration with a healthy nCAC till I know 50-year-old men a little too intimately.",
     "Online, offline, a million dollars, or one dollar… I'll still give you an unfair advantage.",
   ],
+  aboutBitchington: {
+    heading: "After hours as Bitchington",
+    text: "On weekends, I go by Bitchington. It's my pop culture newsletter where I bring readers new music, trends and gossip that shook my world. Bitchington is fuelled by an obsession to relate to the unrelatable lives of the rich and famous. It's a passion project that nourishes my soul and inspires my 9-to-5.",
+  },
   // Aspect ratios (w/h) are the real pixel dimensions of each photo —
   // the justified-gallery layout below needs them upfront to size
   // rows without waiting on image load.
@@ -235,7 +240,7 @@ const TOP_PROJECTS = [
     tag: "noah",
     year: "",
     role: "Art Director & Creative Lead",
-    hero: image("assets/images/noah-better-campaign-hero.jpg", "Model with a half-shaved mullet and sunglasses for noah's Better campaign"),
+    hero: image("assets/images/noah-better-sex.jpg", "Better Sex — model in athletic wear for noah's Better campaign"),
     headache: {
       text: "Men’s health is usually a sea of chiseled models and sterile, clinical perfection. We needed to genuinely humanise the brand and bring its tagline — “Better Health, Better You” — to life by proving that progress matters more than perfection.",
       media: [],
@@ -246,11 +251,12 @@ const TOP_PROJECTS = [
     },
     hustle: {
       text: "I cast the talent and directed a gloriously unhinged shoot. For ED, we stuffed a nerdy model's athletic shorts for a visibly larger bulge. For hair loss, I personally shaved a model's head into increasingly ridiculous cuts between takes while he maintained absolute, delusional confidence. And for weight loss, we got a middle-aged man proudly baring his gut in tighty-whities.",
+      carousel: true,
       media: [
+        image("assets/images/noah-better-sex.jpg", "Better Sex — model in athletic wear for noah's Better campaign"),
         image("assets/images/noah-better-hair-1.jpg", "Better Hair — model freshly bald for noah's Better campaign"),
         image("assets/images/noah-better-hair-2.jpg", "Better Hair — model mid-shave with a mullet for noah's Better campaign"),
         image("assets/images/noah-better-hair-3.jpg", "Better Hair — close-up of the model's shaved hairline for noah's Better campaign"),
-        image("assets/images/noah-better-sex.jpg", "Better Sex — model in athletic wear for noah's Better campaign"),
         image("assets/images/noah-better-shape.jpg", "Better Shape — model in white underwear for noah's Better campaign"),
       ],
     },

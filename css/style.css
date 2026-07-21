@@ -1226,6 +1226,13 @@ section:last-of-type {
   margin: 0;
 }
 
+.about-bio__subheading {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 10px 0 -4px;
+}
+
 .job-entry,
 .edu-entry {
   display: grid;
