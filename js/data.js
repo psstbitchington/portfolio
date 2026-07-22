@@ -281,7 +281,7 @@ const TOP_PROJECTS = [
       media: [],
     },
     hustle: {
-      text: "I vibe-coded the game from scratch using Claude, art-directed the visuals, wrote every word, and led the creative strategy for the influencer campaign.",
+      text: "I vibe-coded the game from scratch using Claude (idea to demo in 15 minutes), art-directed the visuals, wrote every word, and led the creative strategy for the influencer campaign.",
       media: [video("https://youtube.com/shorts/sospDZArCdc?feature=share", "Man Power Challenge gameplay demo")],
     },
     flex: {
