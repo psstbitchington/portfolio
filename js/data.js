@@ -33,7 +33,7 @@ const SITE = {
       1: 1.3333, 2: 0.75, 3: 1.3333, 4: 0.75, 5: 1.5504, 6: 1.3675,
       7: 0.75, 8: 1.0, 9: 0.75, 10: 1.5009, 11: 0.75, 12: 1.3333,
       13: 1.7786, 14: 0.7505, 15: 1.5009, 16: 0.5625, 17: 0.75,
-      18: 0.75, 19: 1.3333, 20: 1.3333, 21: 1.3333, 22: 0.75,
+      18: 0.75, 19: 1.3333, 20: 1.3333, 21: 1.3333, 22: 0.75, 23: 1.4995,
     };
     const items = {};
     Object.keys(ASPECT).forEach((n) => {
@@ -49,7 +49,7 @@ const SITE = {
   // left to right) — hand-picked to feature the best shots bigger
   // and mix vertical/horizontal photos within each row.
   occupationalPleasuresRows: [
-    [8, 15, 16],
+    [8, 15, 16, 23],
     [10, 14, 4, 1, 12],
     [9, 11, 17, 18, 6],
     [2, 7, 22, 3, 19, 5, 13, 20, 21],
@@ -239,7 +239,7 @@ const TOP_PROJECTS = [
     title: "The “Better” Campaign",
     tag: "noah",
     year: "",
-    role: "Art Director & Creative Lead",
+    role: "Creative Lead",
     hero: image("assets/images/noah-better-campaign-hero.jpg", "Model with a half-shaved mohawk and sunglasses for noah's Better campaign"),
     headache: {
       text: "Men’s health is usually a sea of chiselled models. We needed to genuinely humanise the brand and bring its tagline, ”Better Health, Better You”, to life by proving that progress matters more than perfection.",
@@ -255,8 +255,8 @@ const TOP_PROJECTS = [
       media: [
         image("assets/images/noah-better-sex.jpg", "Better Sex — model in athletic wear for noah's Better campaign"),
         image("assets/images/noah-better-hair-1.jpg", "Better Hair — model freshly bald for noah's Better campaign"),
-        image("assets/images/noah-better-hair-2.jpg", "Better Hair — model mid-shave with a mullet for noah's Better campaign"),
         image("assets/images/noah-better-hair-4.jpg", "Better Hair — model freshly bald in the full campaign look for noah's Better campaign"),
+        image("assets/images/noah-better-hair-2.jpg", "Better Hair — model mid-shave with a mullet for noah's Better campaign"),
         image("assets/images/noah-better-shape.jpg", "Better Shape — model in white underwear for noah's Better campaign"),
       ],
     },
