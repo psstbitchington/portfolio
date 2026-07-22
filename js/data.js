@@ -254,9 +254,9 @@ const TOP_PROJECTS = [
       carousel: true,
       media: [
         image("assets/images/noah-better-sex.jpg", "Better Sex — model in athletic wear for noah's Better campaign"),
+        image("assets/images/noah-better-hair-2.jpg", "Better Hair — model mid-shave with a mullet for noah's Better campaign"),
         image("assets/images/noah-better-hair-1.jpg", "Better Hair — model freshly bald for noah's Better campaign"),
         image("assets/images/noah-better-hair-4.jpg", "Better Hair — model freshly bald in the full campaign look for noah's Better campaign"),
-        image("assets/images/noah-better-hair-2.jpg", "Better Hair — model mid-shave with a mullet for noah's Better campaign"),
         image("assets/images/noah-better-shape.jpg", "Better Shape — model in white underwear for noah's Better campaign"),
       ],
     },
