@@ -945,6 +945,13 @@ section:last-of-type {
   margin: 0 auto;
 }
 
+/* Inside a project card's media column there's a lot more room (the
+   copy column runs long), so let the carousel image grow well past
+   the writing-section cap instead of looking small next to the text. */
+.proj__media-col .img-carousel__img {
+  max-height: 760px;
+}
+
 .img-carousel__controls {
   display: flex;
   align-items: center;

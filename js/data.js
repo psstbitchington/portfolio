@@ -240,17 +240,17 @@ const TOP_PROJECTS = [
     tag: "noah",
     year: "",
     role: "Art Director & Creative Lead",
-    hero: image("assets/images/noah-better-sex.jpg", "Better Sex — model in athletic wear for noah's Better campaign"),
+    hero: image("assets/images/noah-better-hair-1.jpg", "Model freshly bald adjusting sunglasses for noah's Better campaign"),
     headache: {
-      text: "Men’s health is usually a sea of chiseled models and sterile, clinical perfection. We needed to genuinely humanise the brand and bring its tagline — “Better Health, Better You” — to life by proving that progress matters more than perfection.",
+      text: "Men’s health is usually a sea of chiselled models. We needed to genuinely humanise the brand and bring its tagline, ”Better Health, Better You”, to life by proving that progress matters more than perfection.",
       media: [],
     },
     hack: {
-      text: "We ditched the aspirational fantasy and leaned hard into the absurd reality of the “everyman.” We used highly subversive, uncomfortable humour to strip away the shame surrounding erectile dysfunction, hair loss, and weight loss.",
+      text: "We leaned hard into the absurd reality of the \"everyman.\" We used highly subversive humour Noah is known for to strip away the shame surrounding erectile dysfunction, hair loss, and weight loss.",
       media: [],
     },
     hustle: {
-      text: "I cast the talent and directed a gloriously unhinged shoot. For ED, we stuffed a nerdy model's athletic shorts for a visibly larger bulge. For hair loss, I personally shaved a model's head into increasingly ridiculous cuts between takes while he maintained absolute, delusional confidence. And for weight loss, we got a middle-aged man proudly baring his gut in tighty-whities.",
+      text: "I cast the talent, procured wardrobe and fully directed this glorious photoshoot. I personally stuffed shorts for a visibly larger bulge, shaved a model's head into increasingly ridiculous styles, and got a middle-aged man to agree to confidently bare his gut in tighty-whities.",
       carousel: true,
       media: [
         image("assets/images/noah-better-sex.jpg", "Better Sex — model in athletic wear for noah's Better campaign"),
@@ -261,7 +261,7 @@ const TOP_PROJECTS = [
       ],
     },
     flex: {
-      text: "We completely broke the sterile healthcare mold. While originally conceptualised as a standalone campaign, this unapologetically authentic aesthetic was so effective it successfully pivoted to become the foundational visual library that feeds noah's entire digital ecosystem today.",
+      text: "We completely broke the sterile healthcare mould. While originally conceptualised as a standalone campaign, this unapologetically authentic aesthetic was so effective it successfully pivoted to become the foundational visual library that feeds Noah's entire digital ecosystem today.",
       media: [],
     },
   },
@@ -681,6 +681,7 @@ const SOCIALS_CLIENTS = [
       { label: "noah men campaign", media: [image("assets/images/socials/noah/ED/noah men campaign/1 Noah men 4x5.png", "Noah men \u2014 noah social post"), image("assets/images/socials/noah/ED/noah men campaign/2 Noah men 4x5.png", "Noah men \u2014 noah social post"), image("assets/images/socials/noah/ED/noah men campaign/3 Noah men 4x5.png", "Noah men \u2014 noah social post")] },
       { label: "noah men finish strong campaign", media: [image("assets/images/socials/noah/ED/noah men finish strong campaign/Good pump 4x5.png", "Good pump \u2014 noah social post"), image("assets/images/socials/noah/ED/noah men finish strong campaign/Last bro 4x5.png", "Last bro \u2014 noah social post"), image("assets/images/socials/noah/ED/noah men finish strong campaign/Poor form 4x5.png", "Poor form \u2014 noah social post"), image("assets/images/socials/noah/ED/noah men finish strong campaign/Pull out 4x5.png", "Pull out \u2014 noah social post")] },
       { label: null, media: [image("assets/images/socials/noah/HL/Divorce 4x5.png", "Divorce \u2014 noah social post")] },
+      { label: null, media: [image("assets/images/socials/noah/HL/Reject your family inheritance 4x5.png", "Reject your family inheritance \u2014 noah social post")] },
       { label: null, media: [image("assets/images/socials/noah/HL/Say no more 4x5.png", "Say no more \u2014 noah social post")] },
       { label: null, media: [image("assets/images/socials/noah/HL/Star war 1x1.png", "Star war \u2014 noah social post")] },
       { label: null, media: [image("assets/images/socials/noah/HL/Wear hat to bed 1x1.png", "Wear hat to bed \u2014 noah social post")] },
