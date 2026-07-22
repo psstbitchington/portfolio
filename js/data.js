@@ -270,7 +270,7 @@ const TOP_PROJECTS = [
     title: "The noah Man Power Challenge",
     tag: "noah",
     year: "",
-    role: "Creative Strategist and Copywriter",
+    role: "Creative Lead",
     hero: image("assets/images/noah-man-power-challenge.png", "Man Power Challenge retro arcade racing game title screen"),
     headache: {
       text: "Launching testosterone in SG faced strict regulations and a massive education gap. Our 40+ male demographic couldn't pronounce its name, let alone know what it does.",
